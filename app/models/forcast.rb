@@ -1,0 +1,2 @@
+class Forcast < ApplicationRecord
+end
