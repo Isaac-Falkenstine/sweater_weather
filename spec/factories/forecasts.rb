@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :forcast do
+  factory :forecast do
     lat { 1.5 }
     long { 1.5 }
     location { "MyString" }

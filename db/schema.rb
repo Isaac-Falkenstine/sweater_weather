@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_152859) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "forcasts", force: :cascade do |t|
+  create_table "forecasts", force: :cascade do |t|
     t.float "lat"
     t.float "long"
     t.string "location"

@@ -1,6 +1,6 @@
-class CreateForcasts < ActiveRecord::Migration[5.2]
+class CreateForecasts < ActiveRecord::Migration[5.2]
   def change
-    create_table :forcasts do |t|
+    create_table :forecasts do |t|
       t.float :lat
       t.float :long
       t.string :location
