@@ -18,9 +18,15 @@ class Gif
     DarkSkyService.new(location_coords[:lat], location_coords[:lng])
   end
 
-  def summary
+  def summaries
     darksky_service.weekly_forcast.map do |day|
       day[:summary]
+    end
+  end
+
+  def gif_urls
+    summaries.map do |summary|
+      GiphyService.new(summary).url
     end
   end
 end
