@@ -7,9 +7,20 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rspec-rails'
+gem 'figaro'
+gem 'faraday'
+gem 'pry'
+gem 'fast_jsonapi'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'launchy'
+  gem 'webmock'
+  gem 'vcr'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
 end
 
