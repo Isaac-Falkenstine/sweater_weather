@@ -2,12 +2,14 @@ class Gifs
 
   attr_reader :id,
               :daily_forecasts,
-              :location
+              :location,
+              :copyright
 
   def initialize(location)
     @location = location
     @id = darksky_service.right_now_forcast[:time]
-    @daily_forecasts = [make_days]
+    @daily_forecasts = make_days
+    @copyright = "2018"
   end
 
   def location_coords
@@ -37,18 +39,14 @@ class Gifs
   end
 
   def make_days
-
-    x = 0
     times
-    summaries #Refactor
+    summaries
     gif_urls
-    y = summaries.count.times.collect do
-      {time: @times[x],
-       summary: @summaries[x],
-       url: @gif_urls[x]
+    5.times.collect do |int|
+      {time: @times[int],
+       summary: @summaries[int],
+       url: @gif_urls[int]
       }
-      x += 1
     end
-    binding.pry
   end
 end

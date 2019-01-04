@@ -1,10 +1,6 @@
 class GiphySerializer
   include FastJsonapi::ObjectSerializer
-  # attributes :daily_forecasts
-  #            :url,
-  #            :summary
 
-  attribute :daily_forecasts do |day|
-    binding.pry
-  end
+  attributes :daily_forecasts,
+             :copyright
 end
