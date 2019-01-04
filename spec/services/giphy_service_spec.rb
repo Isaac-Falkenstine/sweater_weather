@@ -12,6 +12,6 @@ describe "Giphy Service", type: :service do
     service = GiphyService.new(summary)
 
     expect(service.gif).to eq("https://giphy.com/gifs/animation-art-illustration-3ov9k22S4De372LQf6")
-    expect(servive.summary).to eq("Rainy Day")
+    expect(service.summary).to eq("Rainy Day")
   end
 end
