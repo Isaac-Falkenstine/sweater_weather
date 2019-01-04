@@ -1,17 +1,24 @@
 class Gif
   attr_reader :location,
-              :id
+              :id,
+              :time,
+              :url
 
   def initialize(location)
     @location = location
-    @id = DarkSkyService.new(39.7392358, -104.990251).right_now_forcast[:time]
+    @id = darksky_service.right_now_forcast[:time]
+    @time = darksky_service.right_now_forcast[:time]
+  end
+
+  def location_coords
+    GeocodeService.new(location).coords
+  end
+
+  def darksky_service
+    DarkSkyService.new(location_coords[:lat], location_coords[:lng])
   end
 
   def summary
-    geocode_coords = GeocodeService.new(location).coords
-
-    darksky_service = DarkSkyService.new(geocode_coords[:lat], geocode_coords[:lng])
-
     darksky_service.weekly_forcast.map do |day|
       day[:summary]
     end
