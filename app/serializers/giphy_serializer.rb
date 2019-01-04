@@ -1,8 +1,10 @@
 class GiphySerializer
   include FastJsonapi::ObjectSerializer
-  attr
+  attributes :daily_forecasts
+  #            :url,
+  #            :summary
 
-  attribute :daily_forecasts do |day|
-
-  end
+  # attribute :daily_forecasts do |day|
+  #
+  # end
 end
