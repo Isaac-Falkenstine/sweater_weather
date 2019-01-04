@@ -11,7 +11,7 @@ class GeocodeService
   end
 
   def response
-    url = "json?address=#{@location}&key=#{ENV['GOOGLE_API_KEY']}" 
+    url = "json?address=#{@location}&key=#{ENV['GOOGLE_API_KEY']}"
     conn.get(url)
   end
 

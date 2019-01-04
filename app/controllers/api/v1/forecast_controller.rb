@@ -1,9 +1,6 @@
 class Api::V1::ForecastController < ApplicationController
 
   def index
-
-    # service = GeocodeService(params[:location])
-
-    render json: Forecast.all
+    render json: ForecastSerializer.new(Forecast.new(params[:location]))
   end
 end

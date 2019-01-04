@@ -10,6 +10,7 @@ gem 'rspec-rails'
 gem 'figaro'
 gem 'faraday'
 gem 'pry'
+gem 'fast_jsonapi'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
