@@ -11,11 +11,11 @@ class Gifs
   def initialize(location)
     @location = location
     @id = darksky_service.right_now_forcast[:time]
-    @daily_forecasts = make_days
     @copyright = "2018"
     @times = Times.new(darksky_service).times
     @summaries = Summaries.new(darksky_service).summaries
     @gif_urls = GifUrls.new(@summaries).gif_urls
+    @daily_forecasts = make_days
   end
 
   def location_coords
@@ -28,9 +28,9 @@ class Gifs
 
   def make_days
     5.times.collect do |int|
-      {time: @times[int],
-       summary: @summaries[int],
-       url: @gif_urls[int]
+      {time: times[int],
+       summary: summaries[int],
+       url: gif_urls[int]
       }
     end
   end
