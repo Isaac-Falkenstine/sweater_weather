@@ -6,7 +6,7 @@ class Api::V1::SessionsController < ApplicationController
     if user
       render json: UserSerializer.new(user)
     else
-      render json: "ERROR D:"
+      render :json => {error: "Something went wrong! Please try again."}
     end
   end
 end
