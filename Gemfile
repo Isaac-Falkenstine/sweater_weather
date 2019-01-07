@@ -11,6 +11,8 @@ gem 'figaro'
 gem 'faraday'
 gem 'pry'
 gem 'fast_jsonapi'
+gem 'bcrypt', '~> 3.1.7'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
