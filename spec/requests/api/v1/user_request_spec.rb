@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'making a user api and response' do
 
   it '/api/v1/users' do
@@ -14,6 +16,8 @@ describe 'making a user api and response' do
   it '/api/v1/sessions' do
     post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
     post '/api/v1/sessions?email=email_address@example.com&password=password'
+
+    expect(response).to be_successful
 
     parsed = JSON.parse(response.body, symbolize_names: true)
 
