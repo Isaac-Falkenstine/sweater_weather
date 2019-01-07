@@ -13,6 +13,17 @@ describe 'making a user api and response' do
     expect(User.last.email).to eq('email_address@example.com')
   end
 
+  it '/api/v1/users failure' do
+    post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
+    post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
+
+    expect(response).to be_successful
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:error]).to eq("It looks like a user is already using that email! Please try again.")
+  end
+
   it '/api/v1/sessions' do
     post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
     post '/api/v1/sessions?email=email_address@example.com&password=password'
@@ -27,6 +38,8 @@ describe 'making a user api and response' do
   it '/api/v1/sessions failure' do
     post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
     post '/api/v1/sessions?email=email.wrong.com&password=password'
+
+    expect(response).to be_successful
 
     parsed = JSON.parse(response.body)
 

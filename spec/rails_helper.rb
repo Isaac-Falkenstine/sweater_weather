@@ -70,3 +70,5 @@ VCR.configure do |config|
   config.filter_sensitive_data(ENV['DARKSKY_API_KEY'])
   config.allow_http_connections_when_no_cassette = true
 end
+
+SimpleCov.start "rails"
