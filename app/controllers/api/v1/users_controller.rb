@@ -2,9 +2,15 @@ class Api::V1::UsersController<ApplicationController
 
   def create
     user = User.new(user_params)
-    user[:api_key] = user.key
-    user.save
-    render json: UserSerializer.new(user)
+    if user[:api_key] == nil
+      user.key
+    end
+    
+    if user.save
+      render json: UserSerializer.new(user)
+    else
+      render :json => {error: "It looks like a user is already using that email! Please try again."}
+    end
   end
 
   private
