@@ -35,4 +35,24 @@ describe 'favorite locations and response' do
 
     expect(parsed[:error]).to eq("Unauthorized")
   end
+
+  it '/api/v1/favorites' do
+    post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    post "/api/v1/favorites?location=denver,co&api_key=#{parsed[:data][:attributes][:api_key]}"
+    post "/api/v1/favorites?location=bolder,co&api_key=#{parsed[:data][:attributes][:api_key]}"
+
+    get "/api/v1/favorites?api_key=#{parsed[:data][:attributes][:api_key]}"
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+
+    expect(parsed[:data][:attributes].count).to eq(2)
+    expect(parsed[:data][:attributes].first).to have_key(:location)
+    expect(parsed[:data][:attributes].first).to have_key(:current_weather)
+    expect(parsed[:data][:attributes].first[:location]).to have_key("Denver, CO")
+  end
 end
