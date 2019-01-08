@@ -24,4 +24,15 @@ describe 'favorite locations and response' do
 
     expect(parsed[:error]).to eq("Unauthorized")
   end
+
+  it '/api/v1/favorites invaild key' do
+    post "/api/v1/favorites?location=denver,co&api_key=thisisNOTavaildkey"
+
+    expect(response).not_to be_successful
+    expect(status).to eq(401)
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:error]).to eq("Unauthorized")
+  end
 end
