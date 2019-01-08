@@ -18,7 +18,10 @@ describe 'favorite locations and response' do
     post "/api/v1/favorites?location=denver,co"
 
     expect(response).not_to be_successful
-    #expect it to throw a 401
+    expect(status).to eq(401)
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:error]).to eq("Unauthorized")
   end
 end
-# render file: 'errors/not_found', status: 401
