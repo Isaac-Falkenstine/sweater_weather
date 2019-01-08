@@ -9,4 +9,10 @@ class Api::V1::FavoritesController < ApplicationController
       render json: { error: "Unauthorized" }, status: 401
     end
   end
+
+  def index
+    user = User.find_by(api_key: params[:api_key])
+    binding.pry
+    render json: user.favorites_json
+  end
 end
