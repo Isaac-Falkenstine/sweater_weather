@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'favorite locations and response' do
-  it '/api/v1/favorites' do
+  it '/api/v1/favorites DELETE' do
     post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
 
     parsed = JSON.parse(response.body, symbolize_names: true)
@@ -9,25 +9,26 @@ describe 'favorite locations and response' do
     post "/api/v1/favorites?location=denver,co&api_key=#{parsed[:data][:attributes][:api_key]}"
     post "/api/v1/favorites?location=bolder,co&api_key=#{parsed[:data][:attributes][:api_key]}"
 
-    get "/api/v1/favorites?api_key=#{parsed[:data][:attributes][:api_key]}"
+    delete "/api/v1/favorites?location=denver,co&api_key=#{parsed[:data][:attributes][:api_key]}"
 
     parsed = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(parsed.count).to eq(2)
+    expect(parsed.count).to eq(1)
     expect(parsed.first).to have_key(:location)
     expect(parsed.first).to have_key(:current_weather)
-    expect(parsed.first[:location]).to eq("denver,co")
+    expect(parsed.first[:location]).to eq("bolder,co")
   end
 
-  it '/api/v1/favorites with invaild key' do
+  it '/api/v1/favorites DELETE no api_key' do
     post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
 
     parsed = JSON.parse(response.body, symbolize_names: true)
 
     post "/api/v1/favorites?location=denver,co&api_key=#{parsed[:data][:attributes][:api_key]}"
+    post "/api/v1/favorites?location=bolder,co&api_key=#{parsed[:data][:attributes][:api_key]}"
 
-    get "/api/v1/favorites?api_key=ThisIsNOTAVaildKey"
+    delete "/api/v1/favorites?location=denver,co&api_key=ThisIsNOTAVaildKey"
 
     expect(response).not_to be_successful
     expect(status).to eq(401)
