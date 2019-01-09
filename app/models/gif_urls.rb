@@ -9,7 +9,8 @@ class GifUrls
 
   def make_gif_urls
     summaries.map do |summary|
-      GiphyService.new(summary).url
+      summary_gsubed = summary.gsub(" ", "-")
+      GiphyService.new(summary_gsubed).gif_url
     end
   end
 end
