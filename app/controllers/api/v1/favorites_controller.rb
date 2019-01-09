@@ -12,6 +12,11 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index
     user = User.find_by(api_key: params[:api_key])
-    render json: user.favorites_json
+
+    if user
+      render json: user.favorites_json
+    else
+      render json: { error: "Unauthorized" }, status: 401
+    end
   end
 end

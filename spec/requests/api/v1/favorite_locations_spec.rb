@@ -56,9 +56,13 @@ describe 'favorite locations and response' do
   end
 
   it '/api/v1/favorites with invaild key' do
-    post "/api/v1/favorites?location=denver,co&api_key=ThisIsNOTAVaildKey"
+    post '/api/v1/users?email=email_address@example.com&password=password&password_confirmation=password'
 
-    get "/api/v1/favorites?api_key=#{parsed[:data][:attributes][:api_key]}"
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    post "/api/v1/favorites?location=denver,co&api_key=#{parsed[:data][:attributes][:api_key]}"
+
+    get "/api/v1/favorites?api_key=ThisIsNOTAVaildKey"
 
     expect(response).not_to be_successful
     expect(status).to eq(401)
