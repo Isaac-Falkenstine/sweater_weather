@@ -9,7 +9,7 @@ class GifUrls
 
   def make_gif_urls
     summaries.map do |summary|
-      summary_gsubed = summary.gsub(" ", "-")
+      summary_gsubed = summary.gsub(/[^0-9a-z ]/i, '')
       GiphyService.new(summary_gsubed).gif_url
     end
   end
