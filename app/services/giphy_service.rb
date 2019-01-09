@@ -17,7 +17,7 @@ class GiphyService
     conn.get(url)
   end
 
-  def url
+  def gif
     JSON.parse(response.body, symbolize_names: true)[:data].first[:url]
   end
 end

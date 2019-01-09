@@ -1,4 +1,4 @@
-class Times
+class TimeCollection
   attr_reader :times,
               :service
 

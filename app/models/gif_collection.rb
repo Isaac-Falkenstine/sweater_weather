@@ -1,4 +1,4 @@
-class Gifs
+class GifCollection
 
   attr_reader :id,
               :daily_forecasts,
@@ -12,9 +12,9 @@ class Gifs
     @location = location
     @id = darksky_service.right_now_forcast[:time]
     @copyright = "2018"
-    @times = Times.new(darksky_service).times
-    @summaries = Summaries.new(darksky_service).summaries
-    @gif_urls = GifUrls.new(@summaries).gif_urls
+    @times = TimeCollection.new(darksky_service).times
+    @summaries = SummaryCollection.new(darksky_service).summaries
+    @gif_urls = Gif.new(@summaries).gif_urls
     @daily_forecasts = make_days
   end
 

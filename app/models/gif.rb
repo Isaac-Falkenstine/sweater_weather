@@ -1,4 +1,4 @@
-class GifUrls
+class Gif
   attr_reader :gif_urls,
               :summaries
 
@@ -9,7 +9,8 @@ class GifUrls
 
   def make_gif_urls
     summaries.map do |summary|
-      GiphyService.new(summary).url
+      summary_gsubed = summary.gsub(/[^0-9a-z ]/i, '')
+      GiphyService.new(summary_gsubed).gif
     end
   end
 end

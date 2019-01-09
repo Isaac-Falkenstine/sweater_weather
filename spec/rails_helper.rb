@@ -71,4 +71,8 @@ VCR.configure do |config|
   config.allow_http_connections_when_no_cassette = true
 end
 
-SimpleCov.start "rails"
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter "/app/channels"
+end
