@@ -14,10 +14,10 @@ class GiphyService
 
   def response
     url = "search?api_key=#{ENV['GIPHY_API_KEY']}&q=#{@summary}"
-    conn.get(url.to_s)
+    conn.get(url)
   end
 
-  def gif_url
+  def gif
     JSON.parse(response.body, symbolize_names: true)[:data].first[:url]
   end
 end

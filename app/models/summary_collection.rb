@@ -1,4 +1,4 @@
-class Summaries
+class SummaryCollection
   attr_reader :service,
               :summaries
 
