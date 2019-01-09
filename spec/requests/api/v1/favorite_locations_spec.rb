@@ -26,7 +26,7 @@ describe 'favorite locations and response' do
   end
 
   it '/api/v1/favorites invaild key' do
-    post "/api/v1/favorites?location=denver,co&api_key=thisisNOTavaildkey"
+    post "/api/v1/favorites?location=denver,co&api_key=ThisIsNOTAVaildKey"
 
     expect(response).not_to be_successful
     expect(status).to eq(401)
@@ -49,10 +49,22 @@ describe 'favorite locations and response' do
     parsed = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(parsed.count).to eq(2)
+    expect(parsed.first).to have_key(:location)
+    expect(parsed.first).to have_key(:current_weather)
+    expect(parsed.first[:location]).to eq("denver,co")
+  end
 
-    expect(parsed[:data][:attributes].count).to eq(2)
-    expect(parsed[:data][:attributes].first).to have_key(:location)
-    expect(parsed[:data][:attributes].first).to have_key(:current_weather)
-    expect(parsed[:data][:attributes].first[:location]).to have_key("Denver, CO")
+  it '/api/v1/favorites with invaild key' do
+    post "/api/v1/favorites?location=denver,co&api_key=ThisIsNOTAVaildKey"
+
+    get "/api/v1/favorites?api_key=#{parsed[:data][:attributes][:api_key]}"
+
+    expect(response).not_to be_successful
+    expect(status).to eq(401)
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:error]).to eq("Unauthorized")
   end
 end
